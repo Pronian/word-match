@@ -1,0 +1,42 @@
+:root {
+	--c-text-dark: #131313;
+	--c-theme: #009de6;
+	--c-theme-dark: #007db8;
+	--c-red: #ed254e;
+	--weight-normal: 700;
+	--weight-bold: 900;
+}
+
+* {
+	box-sizing: border-box;
+	line-height: 1.25;
+}
+
+:focus {
+	outline: 3px solid var(--c-text-dark);
+}
+
+a {
+	text-decoration: none;
+	color: var(--c-theme);
+}
+
+a:hover,
+a:focus {
+	color: var(--c-theme-dark);
+}
+
+body {
+	margin: 0;
+	font-family: 'Lato', sans-serif;
+	font-weight: var(--weight-normal);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: var(--weight-bold);
+}
