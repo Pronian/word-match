@@ -5,9 +5,9 @@
 	export let title: string;
 </script>
 
-<BoxContainer --color="green">
-	<button {title}>
-		<IconPlus width="32" height="32"/>
+<BoxContainer --color="var(--c-green-dark)">
+	<button {title} on:click>
+		<IconPlus width="32" height="32" transform="scale(1.2)"/>
 	</button>
 </BoxContainer>
 
@@ -19,7 +19,11 @@
 		border-radius: 0;
 		padding: 0;
 		line-height: 0;
-		color: white;
-		background-color: var(--color);
+		color: var(--c-text-light);
+		background-color: var(--c-green);
+	}
+
+	button:not(:disabled) {
+		cursor: pointer;
 	}
 </style>

@@ -1,8 +1,11 @@
 :root {
+	--c-text-light: #ffffff;
 	--c-text-dark: #131313;
 	--c-theme: #009de6;
 	--c-theme-dark: #007db8;
 	--c-red: #ed254e;
+	--c-green: #00b159;
+	--c-green-dark: #3FA242;
 	--weight-normal: 700;
 	--weight-bold: 900;
 }
