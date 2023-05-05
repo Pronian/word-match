@@ -3,15 +3,15 @@
 
 	export let depth = 5;
 
-	let appliedDepth = depth + 'px';
+	let dynamicDepth = depth + 'px';
 	let depthChangeTimeout = 0;
 
 	function tempDepthChange(depthDiff: number, duration: number) {
-		appliedDepth = (depth + depthDiff) + 'px';
+		dynamicDepth = (depth + depthDiff) + 'px';
 		clearTimeout(depthChangeTimeout);
 
 		depthChangeTimeout = setTimeout(() => {
-			appliedDepth = depth + 'px';
+			dynamicDepth = depth + 'px';
 		}, duration * 2);
 	}
 
@@ -27,7 +27,7 @@
 </script>
 
 <div class="cont"
-	style:--depth={appliedDepth}
+	style:--depth={dynamicDepth}
 	style:margin-top={depth + 'px'}
 	style:margin-right={depth + 'px'}
 >
