@@ -1,6 +1,8 @@
 :root {
 	--c-text-light: #ffffff;
 	--c-text-dark: #131313;
+	--c-bg-light: #ffffff;
+	--c-bg-dark: #131313;
 	--c-theme: #009de6;
 	--c-theme-dark: #007db8;
 	--c-red: #ed254e;
@@ -12,7 +14,9 @@
 
 * {
 	box-sizing: border-box;
+	font-family: 'Lato', sans-serif;
 	line-height: 1.25;
+	font-weight: var(--weight-normal);
 }
 
 :focus {
@@ -31,8 +35,6 @@ a:focus {
 
 body {
 	margin: 0;
-	font-family: 'Lato', sans-serif;
-	font-weight: var(--weight-normal);
 }
 
 h1,

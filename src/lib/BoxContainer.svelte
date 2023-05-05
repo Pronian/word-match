@@ -50,6 +50,7 @@
 		--overlap: 1px;
 		position: relative;
 		transition: var(--transition);
+		width: min-content;
 	}
 
 	.box-content {

@@ -1,8 +1,34 @@
 <script lang="ts">
 	import ButtonAdd from '$lib/ButtonAdd.svelte';
-	import type { PageData } from './$types';
+	import InputPool from './InputPool.svelte';
 
-	export let data: PageData;
+	let pools: string[] = [];
+
+	function addPool() {
+		pools.push('');
+		pools = pools;
+	}
+
+	function removePool(pool: string) {
+		pools.pop();
+		pools = pools;
+	}
 </script>
 
-<ButtonAdd title="Add Word Pool" />
+<div class="pool-cont">
+	{#each pools as pool}
+		<InputPool on:close={() => {removePool(pool)}}/>
+	{/each}
+</div>
+
+<ButtonAdd title="Add Word Pool" on:click={addPool}/>
+
+<style>
+	.pool-cont {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 20px;
+		gap: 20px;
+	}
+</style>
