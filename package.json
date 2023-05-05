@@ -13,6 +13,7 @@
 	},
 	"devDependencies": {
 		"@fontsource/lato": "^4.5.10",
+		"@iconify-json/basil": "^1.1.1",
 		"@sveltejs/adapter-static": "^2.0.2",
 		"@sveltejs/kit": "^1.5.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
@@ -26,6 +27,7 @@
 		"svelte-check": "^3.0.1",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
+		"unplugin-icons": "^0.16.1",
 		"vite": "^4.3.0"
 	},
 	"type": "module"
