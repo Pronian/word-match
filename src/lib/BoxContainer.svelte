@@ -1,14 +1,29 @@
 <script lang="ts">
+	import { onDestroy } from "svelte";
+
 	export let depth = 5;
+
 	let appliedDepth = depth + 'px';
+	let depthChangeTimeout = 0;
 
-	function onClick() {
-		appliedDepth = (depth - 2) + 'px';
+	function tempDepthChange(depthDiff: number, duration: number) {
+		appliedDepth = (depth + depthDiff) + 'px';
+		clearTimeout(depthChangeTimeout);
 
-		setTimeout(() => {
-			appliedDepth = depth + 'px';;
-		}, 400);
+		depthChangeTimeout = setTimeout(() => {
+			appliedDepth = depth + 'px';
+		}, duration * 2);
 	}
+
+	function onPress(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
+			tempDepthChange(-2, 200);
+		}
+	}
+
+	onDestroy(() => {
+		clearTimeout(depthChangeTimeout);
+	});
 </script>
 
 <div class="cont"
@@ -21,7 +36,10 @@
 	<div class="border-left"/>
 	<div class="border-bottom"/>
 	<div class="border-corner-right"/>
-	<div class="box-content" on:click={onClick}>
+	<div class="box-content"
+		on:click={() => {tempDepthChange(-2, 200)}}
+		on:keypress={onPress}
+	>
 		<slot />
 	</div>
 </div>
