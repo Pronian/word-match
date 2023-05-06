@@ -35,6 +35,7 @@
 	nav {
 		display: flex;
 		gap: 20px;
+		text-transform: uppercase;
 	}
 
 	main {

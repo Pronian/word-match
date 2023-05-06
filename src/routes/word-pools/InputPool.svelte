@@ -1,25 +1,45 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import { onMount, createEventDispatcher } from 'svelte';
 	import BoxContainer from "$lib/BoxContainer.svelte";
 	import CrossPlus from "~icons/basil/cross-solid";
 
 	const dispatch = createEventDispatcher();
 	let count = 1;
-	let letters: string = '';
+	let elLetters: HTMLInputElement;
+	let letters: string = 'ABC';
+
+	onMount(() => {
+		elLetters.select();
+		elLetters.focus();
+	});
 </script>
 
 <BoxContainer --color="var(--c-theme-dark)">
 	<div class="cont">
 		<div class="top">
-			<input class="count" type="number" bind:value={count} min="1" max="20">
-			<span>of</span>
-			<button on:click={() => dispatch('close')}>
+			<input class="count" type="number" bind:value={count}
+				min="1" max="20"
+				aria-label="Number of letters in the letter pool"
+			>
+			<span>from</span>
+			<button title="Remove pool" on:click={() => dispatch('close')}>
 				<CrossPlus class="i-cross"/>
 			</button>
 		</div>
 		<div class="bottom">
-			<span class="width-calc" aria-hidden="true">{letters || '0'}</span> <!-- This is used to calculate the width of the input -->
-			<input class="letters" type="text" bind:value={letters} maxlength="20">
+			<!-- width-calc is used to calculate the width of the input -->
+			<span class="width-calc" aria-hidden="true">{letters || '0'}</span>
+			<input class="letters" type="text"
+				bind:this={elLetters}
+				bind:value={letters}
+				minlength="1"
+				maxlength="20"
+				aria-label="Letters in the letter pool"
+				autocomplete="false"
+				autocorrect="false"
+				autocapitalize="false"
+				spellcheck="false"
+			>
 		</div>
 	</div>
 </BoxContainer>
@@ -28,17 +48,18 @@
 	.cont {
 		display: flex;
 		flex-direction: column;
-		--close-size: 26px;
+		--close-size: 24px;
 	}
 	
 	.top {
 		position: relative;
 		display: flex;
 		width: 100%;
-		padding: 0 calc(var(--close-size) + 10px);
+		padding-left: 10px;
+		padding-right: calc(var(--close-size) + 10px);
 		align-items: center;
 		justify-content: center;
-		gap: 10px;
+		gap: 0.5ch;
 		font-size: 18px;
 		color: var(--c-text-light);
 		background-color: var(--c-theme);
@@ -48,7 +69,6 @@
 		display: block;
 		font-size: 20px;
 		font-weight: var(--weight-bold);
-		text-align: center;
 		border: none;
 		outline: none;
 	}
@@ -56,7 +76,8 @@
 	.count {
 		width: 3ch;
 		color: var(--c-text-light);
-		background-color: transparent
+		background-color: transparent;
+		text-align: right;
 	}
 
 	button {
@@ -75,7 +96,7 @@
 	button :global(.i-cross) {
 		width: var(--close-size);
 		height: var(--close-size);
-		transform: scale(1.4);
+		transform: scale(1.5);
 	}
 
 	.bottom {
@@ -83,9 +104,10 @@
 	}
 
 	.width-calc, .letters {
+		padding: 0 1ch;
 		color: var(--c-text-dark);
 		background-color: var(--c-bg-light);
-		padding: 0 15px;
+		text-align: center;
 		letter-spacing: 0.1ch;
 		text-transform: uppercase;
 	}
@@ -95,5 +117,9 @@
 		top: 0;
 		left: 0;
 		width: 100%;
+	}
+
+	.letters::selection {
+		background-color: var(--c-yellow);
 	}
 </style>
