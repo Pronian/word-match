@@ -3,9 +3,11 @@
 	import IconPlus from "~icons/basil/plus-solid";
 
 	export let title: string;
+	let className = '';
+	export { className as class };
 </script>
 
-<BoxContainer --color="var(--c-green-dark)">
+<BoxContainer class={className} --color="var(--c-green-dark)">
 	<button {title} on:click>
 		<IconPlus width="32" height="32" transform="scale(1.2)"/>
 	</button>

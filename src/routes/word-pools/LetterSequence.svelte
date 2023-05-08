@@ -24,7 +24,8 @@
 		--close-size: 25px;
 		display: flex;
 		align-items: center;
-		padding-right: var(--close-size)
+		padding-right: var(--close-size);
+		background-color: var(--c-bg-light);
 	}
 
 	.letter {

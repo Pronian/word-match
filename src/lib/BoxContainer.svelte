@@ -2,6 +2,8 @@
 	import { onDestroy } from "svelte";
 
 	export let depth = 5;
+	let className = '';
+	export { className as class };
 
 	let dynamicDepth = depth + 'px';
 	let depthChangeTimeout = 0;
@@ -26,7 +28,7 @@
 	});
 </script>
 
-<div class="cont"
+<div class="cont {className}"
 	style:--depth={dynamicDepth}
 	style:margin-top={depth + 'px'}
 	style:margin-right={depth + 'px'}
@@ -51,6 +53,7 @@
 		position: relative;
 		transition: var(--transition);
 		width: min-content;
+		height: min-content;
 	}
 
 	.box-content {
