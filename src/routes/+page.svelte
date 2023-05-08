@@ -1,6 +1,9 @@
 <svelte:head>
 	<title>WordMatch</title>
-	<meta name="description" content="Some wordy tools to help you in your daily word finding adventures.">
+	<meta
+		name="description"
+		content="Some wordy tools to help you in your daily word finding adventures."
+	/>
 </svelte:head>
 
 <div>

@@ -11,7 +11,7 @@
 	let depthChangeTimeout = 0;
 
 	function click(depthDiff: number, duration: number) {
-		dynamicDepth = (depth + depthDiff) + 'px';
+		dynamicDepth = depth + depthDiff + 'px';
 		clearTimeout(depthChangeTimeout);
 
 		setTimeout(() => {
@@ -29,21 +29,22 @@
 </script>
 
 <div class="cont {className}" style:--depth={dynamicDepth}>
-	<div class="butt-shape"/>
+	<div class="butt-shape" />
 	<div class="butt-wrapper">
 		<button class={classBtn} on:click={() => click(-2, 200)}>
-			<slot/>
+			<slot />
 		</button>
 	</div>
 </div>
 
 <style>
 	.cont {
-		--radius : 30px;
+		--radius: 30px;
 		position: relative;
 	}
 
-	.butt-shape, button {
+	.butt-shape,
+	button {
 		display: block;
 		border-radius: var(--radius);
 	}

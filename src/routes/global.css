@@ -6,9 +6,9 @@
 	--c-theme: #009de6;
 	--c-theme-dark: #007db8;
 	--c-red: #ed254e;
-	--c-yellow: #F4C95D;
+	--c-yellow: #f4c95d;
 	--c-green: #00b159;
-	--c-green-dark: #3FA242;
+	--c-green-dark: #3fa242;
 	--c-letter-separator: #c0c0c0;
 	--weight-normal: 700;
 	--weight-bold: 900;
@@ -55,6 +55,6 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
-input[type=number] {
+input[type='number'] {
 	-moz-appearance: textfield;
 }

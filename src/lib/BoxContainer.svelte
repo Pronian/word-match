@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from "svelte";
+	import { onDestroy } from 'svelte';
 
 	export let depth = 5;
 	let className = '';
@@ -9,7 +9,7 @@
 	let depthChangeTimeout = 0;
 
 	function tempDepthChange(depthDiff: number, duration: number) {
-		dynamicDepth = (depth + depthDiff) + 'px';
+		dynamicDepth = depth + depthDiff + 'px';
 		clearTimeout(depthChangeTimeout);
 
 		depthChangeTimeout = setTimeout(() => {
@@ -28,18 +28,22 @@
 	});
 </script>
 
-<div class="cont {className}"
+<div
+	class="cont {className}"
 	style:--depth={dynamicDepth}
 	style:margin-top={depth + 'px'}
 	style:margin-right={depth + 'px'}
 >
-	<div class="border-corner-top"/>
-	<div class="border-top"/>
-	<div class="border-left"/>
-	<div class="border-bottom"/>
-	<div class="border-corner-right"/>
-	<div class="box-content"
-		on:click={() => {tempDepthChange(-2, 200)}}
+	<div class="border-corner-top" />
+	<div class="border-top" />
+	<div class="border-left" />
+	<div class="border-bottom" />
+	<div class="border-corner-right" />
+	<div
+		class="box-content"
+		on:click={() => {
+			tempDepthChange(-2, 200);
+		}}
 		on:keypress={onPress}
 	>
 		<slot />

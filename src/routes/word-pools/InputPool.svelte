@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount, createEventDispatcher } from 'svelte';
-	import BoxContainer from "$lib/BoxContainer.svelte";
-	import CrossPlus from "~icons/basil/cross-solid";
+	import BoxContainer from '$lib/BoxContainer.svelte';
+	import CrossPlus from '~icons/basil/cross-solid';
 
 	const dispatch = createEventDispatcher();
 	let count = 1;
 	let elLetters: HTMLInputElement;
-	let letters: string = 'ABC';
+	let letters = 'ABC';
 
 	onMount(() => {
 		elLetters.select();
@@ -17,19 +17,25 @@
 <BoxContainer --color="var(--c-theme-dark)">
 	<div class="cont">
 		<div class="top">
-			<input class="count" type="number" bind:value={count}
-				min="1" max="20"
+			<input
+				class="count"
+				type="number"
+				bind:value={count}
+				min="1"
+				max="20"
 				aria-label="Number of letters in the letter pool"
-			>
+			/>
 			<span>from</span>
 			<button title="Remove pool" on:click={() => dispatch('close')}>
-				<CrossPlus class="i-cross"/>
+				<CrossPlus class="i-cross" />
 			</button>
 		</div>
 		<div class="bottom">
 			<!-- width-calc is used to calculate the width of the input -->
 			<span class="width-calc" aria-hidden="true">{letters || '0'}</span>
-			<input class="letters" type="text"
+			<input
+				class="letters"
+				type="text"
 				bind:this={elLetters}
 				bind:value={letters}
 				minlength="1"
@@ -39,7 +45,7 @@
 				autocorrect="false"
 				autocapitalize="false"
 				spellcheck="false"
-			>
+			/>
 		</div>
 	</div>
 </BoxContainer>
@@ -50,7 +56,7 @@
 		flex-direction: column;
 		--close-size: 24px;
 	}
-	
+
 	.top {
 		position: relative;
 		display: flex;
@@ -65,7 +71,8 @@
 		background-color: var(--c-theme);
 	}
 
-	input, .width-calc {
+	input,
+	.width-calc {
 		display: block;
 		font-size: 20px;
 		font-weight: var(--weight-bold);
@@ -103,7 +110,8 @@
 		position: relative;
 	}
 
-	.width-calc, .letters {
+	.width-calc,
+	.letters {
 		padding: 0 1ch;
 		color: var(--c-text-dark);
 		background-color: var(--c-bg-light);

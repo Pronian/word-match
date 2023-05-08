@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import BoxContainer from "$lib/BoxContainer.svelte";
-	import CrossPlus from "~icons/basil/cross-solid";
+	import BoxContainer from '$lib/BoxContainer.svelte';
+	import CrossPlus from '~icons/basil/cross-solid';
 
 	const dispatch = createEventDispatcher();
 
@@ -14,7 +14,7 @@
 			<div class="letter">{letter}</div>
 		{/each}
 		<button title="Remove letter sequence" on:click={() => dispatch('close')}>
-			<CrossPlus class="i-cross"/>
+			<CrossPlus class="i-cross" />
 		</button>
 	</div>
 </BoxContainer>
@@ -37,7 +37,7 @@
 	}
 
 	.letter:last-of-type {
-		border-color: var(--c-bg-dark)
+		border-color: var(--c-bg-dark);
 	}
 
 	button {

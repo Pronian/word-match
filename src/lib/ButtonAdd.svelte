@@ -1,6 +1,6 @@
 <script lang="ts">
-	import BoxContainer from "$lib/BoxContainer.svelte";
-	import IconPlus from "~icons/basil/plus-solid";
+	import BoxContainer from '$lib/BoxContainer.svelte';
+	import IconPlus from '~icons/basil/plus-solid';
 
 	export let title: string;
 	let className = '';
@@ -9,7 +9,7 @@
 
 <BoxContainer class={className} --color="var(--c-green-dark)">
 	<button {title} on:click>
-		<IconPlus width="32" height="32" transform="scale(1.2)"/>
+		<IconPlus width="32" height="32" transform="scale(1.2)" />
 	</button>
 </BoxContainer>
 

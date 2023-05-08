@@ -19,19 +19,21 @@
 
 <div class="pool-cont">
 	{#each pools as pool}
-		<InputPool on:close={() => {removePool(pool)}}/>
+		<InputPool
+			on:close={() => {
+				removePool(pool);
+			}}
+		/>
 	{/each}
-	<LetterSequence/>
+	<LetterSequence />
 </div>
 
 <div class="buttons">
-	<ButtonAdd class="add-pool" title="Add Word Pool" on:click={addPool}/>
+	<ButtonAdd class="add-pool" title="Add Word Pool" on:click={addPool} />
 	<ButtonRound classBtn="btn-convert">
-		Convert last<br>to sequence
+		Convert last<br />to sequence
 	</ButtonRound>
-	<ButtonRound>
-		Find words
-	</ButtonRound>
+	<ButtonRound>Find words</ButtonRound>
 </div>
 
 <style>
