@@ -29,13 +29,15 @@
 	}
 
 	.letter {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-right: 2px solid var(--c-bg-dark);
+		border-right: 2px solid var(--c-letter-separator);
 		width: 2.4ch;
 		font-size: 20px;
 		font-weight: var(--weight-bold);
+		text-align: center;
+	}
+
+	.letter:last-of-type {
+		border-color: var(--c-bg-dark)
 	}
 
 	button {
