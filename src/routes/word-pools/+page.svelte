@@ -3,41 +3,53 @@
 	import ButtonRound from '$lib/ButtonRound.svelte';
 	import InputPool from './InputPool.svelte';
 	import LetterSequence from './LetterSequence.svelte';
-	import type { LetterPool } from '$lib/word-matching/letterPools';
+	import type { PoolOrSequence } from '$lib/word-matching/letterPools';
 
-	let pools: LetterPool[] = [];
+	let parts: PoolOrSequence[] = [];
 
-	function addPool() {
-		pools.push({ count: 1, letters: ['A', 'B', 'C'] });
-		pools = pools;
+	function addPart() {
+		parts.push({ count: 1, letters: ['A', 'B', 'C'] });
+		parts = parts;
 	}
 
-	function removePool(pool: LetterPool) {
-		const index = pools.indexOf(pool);
+	function removePart(part: PoolOrSequence) {
+		const index = parts.indexOf(part);
 		if (index > -1) {
-			pools.splice(index, 1);
-			pools = pools;
+			parts.splice(index, 1);
+			parts = parts;
 		}
 	}
 
-	$: console.log('letter pools', pools);
+	function convertLastToSequence() {
+		const last = parts.at(-1);
+
+		if (!last || typeof last === 'string') return;
+
+		const letters = last.letters.join('');
+		parts[parts.length - 1] = letters;
+	}
+
+	$: console.log('letter pool parts', parts);
 </script>
 
 <div class="pool-cont">
-	{#each pools as pool (pool)}
-		<InputPool
-			bind:value={pool}
-			on:close={() => {
-				removePool(pool);
-			}}
-		/>
+	{#each parts as part (part)}
+		{#if typeof part === 'string'}
+			<LetterSequence value={part} />
+		{:else}
+			<InputPool
+				bind:value={part}
+				on:close={() => {
+					removePart(part);
+				}}
+			/>
+		{/if}
 	{/each}
-	<LetterSequence />
 </div>
 
 <div class="buttons">
-	<ButtonAdd class="add-pool" title="Add Word Pool" on:click={addPool} />
-	<ButtonRound classBtn="btn-convert">
+	<ButtonAdd class="add-pool" title="Add Word Pool" on:click={addPart} />
+	<ButtonRound classBtn="btn-convert" on:click={convertLastToSequence}>
 		Convert last<br />to sequence
 	</ButtonRound>
 	<ButtonRound>Find words</ButtonRound>

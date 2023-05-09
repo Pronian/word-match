@@ -5,12 +5,12 @@
 
 	const dispatch = createEventDispatcher();
 
-	export const letters = 'asdsadsa'.toUpperCase();
+	export let value: string;
 </script>
 
 <BoxContainer --color="var(--c-bg-dark)">
 	<div class="letters">
-		{#each letters as letter}
+		{#each value as letter}
 			<div class="letter">{letter}</div>
 		{/each}
 		<button title="Remove letter sequence" on:click={() => dispatch('close')}>
@@ -34,6 +34,7 @@
 		font-size: 20px;
 		font-weight: var(--weight-bold);
 		text-align: center;
+		text-transform: uppercase;
 	}
 
 	.letter:last-of-type {

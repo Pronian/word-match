@@ -9,6 +9,8 @@ export interface LetterPool {
 	count: number;
 }
 
+export type PoolOrSequence = LetterPool | string;
+
 export function inputToLetterPools(searchStr: string) {
 	const reVar = /(\[(?<letters>[a-z]+)\](?<count>\d{1,2}))|(?<letter>[a-z])/gi;
 	const result: LetterPool[] = [];
