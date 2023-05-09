@@ -2,16 +2,23 @@
 	import { onMount, createEventDispatcher } from 'svelte';
 	import BoxContainer from '$lib/BoxContainer.svelte';
 	import CrossPlus from '~icons/basil/cross-solid';
+	import type { LetterPool } from '$lib/word-matching/letterPools';
+
+	export let value: LetterPool = { count: 1, letters: ['A', 'B', 'C'] };
 
 	const dispatch = createEventDispatcher();
-	let count = 1;
 	let elLetters: HTMLInputElement;
-	let letters = 'ABC';
+	let lettersAsText = value.letters.join('');
 
 	onMount(() => {
 		elLetters.select();
 		elLetters.focus();
 	});
+
+	function onLetterInput() {
+		lettersAsText = elLetters.value.toUpperCase();
+		value.letters = lettersAsText.split('');
+	}
 </script>
 
 <BoxContainer --color="var(--c-theme-dark)">
@@ -20,7 +27,7 @@
 			<input
 				class="count"
 				type="number"
-				bind:value={count}
+				bind:value={value.count}
 				min="1"
 				max="20"
 				aria-label="Number of letters in the letter pool"
@@ -31,13 +38,15 @@
 			</button>
 		</div>
 		<div class="bottom">
-			<!-- width-calc is used to calculate the width of the input -->
-			<span class="width-calc" aria-hidden="true">{letters || '0'}</span>
+			<!-- width-calc is used to calculate the width of the input
+				so that the input can resize dynamically -->
+			<span class="width-calc" aria-hidden="true">{lettersAsText || '0'}</span>
 			<input
 				class="letters"
 				type="text"
 				bind:this={elLetters}
-				bind:value={letters}
+				value={lettersAsText}
+				on:input={onLetterInput}
 				minlength="1"
 				maxlength="20"
 				aria-label="Letters in the letter pool"

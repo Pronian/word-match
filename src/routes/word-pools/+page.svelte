@@ -3,23 +3,30 @@
 	import ButtonRound from '$lib/ButtonRound.svelte';
 	import InputPool from './InputPool.svelte';
 	import LetterSequence from './LetterSequence.svelte';
+	import type { LetterPool } from '$lib/word-matching/letterPools';
 
-	let pools: string[] = [];
+	let pools: LetterPool[] = [];
 
 	function addPool() {
-		pools.push('');
+		pools.push({ count: 1, letters: ['A', 'B', 'C'] });
 		pools = pools;
 	}
 
-	function removePool(pool: string) {
-		pools.pop();
-		pools = pools;
+	function removePool(pool: LetterPool) {
+		const index = pools.indexOf(pool);
+		if (index > -1) {
+			pools.splice(index, 1);
+			pools = pools;
+		}
 	}
+
+	$: console.log('letter pools', pools);
 </script>
 
 <div class="pool-cont">
-	{#each pools as pool}
+	{#each pools as pool (pool)}
 		<InputPool
+			bind:value={pool}
 			on:close={() => {
 				removePool(pool);
 			}}
