@@ -11,6 +11,31 @@ export interface LetterPool {
 
 export type PoolOrSequence = LetterPool | string;
 
+export function normalizeToPools(parts: PoolOrSequence[]): LetterPool[] {
+	let result: LetterPool[] = [];
+
+	for (const part of parts) {
+		if (typeof part === 'string') {
+			result = result.concat(
+				part
+					.toLowerCase()
+					.split('')
+					.map((letter) => ({
+						letters: [letter],
+						count: 1
+					}))
+			);
+		} else {
+			result.push({
+				letters: part.letters.map((letter) => letter.toLowerCase()),
+				count: part.count
+			});
+		}
+	}
+
+	return result;
+}
+
 export function inputToLetterPools(searchStr: string) {
 	const reVar = /(\[(?<letters>[a-z]+)\](?<count>\d{1,2}))|(?<letter>[a-z])/gi;
 	const result: LetterPool[] = [];
@@ -89,8 +114,15 @@ export function wordMatchesLetterPools(word: string, pools: LetterPool[]) {
 export function findWordsFromLetterPools(pools: LetterPool[], dictionaryWords: string[]) {
 	const poolWordLength = wordLengthFromLetterPools(pools);
 	const wordsMatchingLength = dictionaryWords.filter((word) => word.length === poolWordLength);
+	console.log({ wordsMatchingLength });
 
 	const foundWords = wordsMatchingLength.filter((word) => wordMatchesLetterPools(word, pools));
+	console.log({ foundWords });
 
 	return foundWords;
+}
+
+export function findWordsFromPoolsAndSequences(parts: PoolOrSequence[], dictionaryWords: string[]) {
+	const pools = normalizeToPools(parts);
+	return findWordsFromLetterPools(pools, dictionaryWords);
 }

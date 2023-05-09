@@ -1,11 +1,22 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import ButtonAdd from '$lib/ButtonAdd.svelte';
 	import ButtonRound from '$lib/ButtonRound.svelte';
 	import InputPool from './InputPool.svelte';
 	import LetterSequence from './LetterSequence.svelte';
-	import type { PoolOrSequence } from '$lib/word-matching/letterPools';
+	import {
+		type PoolOrSequence,
+		findWordsFromPoolsAndSequences
+	} from '$lib/word-matching/letterPools';
+	import { loadWords } from '$lib/word-matching/dictionary';
 
+	let wordsPromise: Promise<string[]>;
+	let results: string[] = [];
 	let parts: PoolOrSequence[] = [];
+
+	onMount(() => {
+		wordsPromise = loadWords();
+	});
 
 	function addPart() {
 		parts.push({ count: 1, letters: ['A', 'B', 'C'] });
@@ -35,7 +46,12 @@
 <div class="pool-cont">
 	{#each parts as part (part)}
 		{#if typeof part === 'string'}
-			<LetterSequence value={part} />
+			<LetterSequence
+				value={part}
+				on:close={() => {
+					removePart(part);
+				}}
+			/>
 		{:else}
 			<InputPool
 				bind:value={part}
@@ -52,7 +68,28 @@
 	<ButtonRound classBtn="btn-convert" on:click={convertLastToSequence}>
 		Convert last<br />to sequence
 	</ButtonRound>
-	<ButtonRound>Find words</ButtonRound>
+
+	{#await wordsPromise}
+		<div>Loading dictionary</div>
+	{:then words}
+		<ButtonRound
+			on:click={() => {
+				results = findWordsFromPoolsAndSequences(parts, words);
+			}}>Find words</ButtonRound
+		>
+	{/await}
+</div>
+
+<div class="results">
+	{#if results.length > 0}
+		<ol>
+			{#each results as result}
+				<li>{result}</li>
+			{/each}
+		</ol>
+	{:else}
+		No results
+	{/if}
 </div>
 
 <style>
