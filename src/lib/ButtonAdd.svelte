@@ -16,7 +16,6 @@
 <style>
 	button {
 		display: block;
-		outline: none;
 		border: none;
 		border-radius: 0;
 		padding: 0;
@@ -27,5 +26,9 @@
 
 	button:not(:disabled) {
 		cursor: pointer;
+	}
+
+	button:focus {
+		outline: 3px solid var(--c-bg-dark);
 	}
 </style>

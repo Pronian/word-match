@@ -83,6 +83,7 @@
 <div class="results">
 	{#if results.length > 0}
 		<ol>
+			Results:
 			{#each results as result}
 				<li>{result}</li>
 			{/each}

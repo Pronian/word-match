@@ -19,6 +19,21 @@
 		lettersAsText = elLetters.value.toUpperCase();
 		value.letters = lettersAsText.split('');
 	}
+
+	function onLetterInputKeydown(event: KeyboardEvent) {
+		if (event.key.match(/[a-z]/i)) {
+			return;
+		} else if (event.key.match(/\d/)) {
+			event.preventDefault();
+			value.count = Number(event.key);
+		} else if (event.key === 'ArrowUp') {
+			event.preventDefault();
+			if (value.count < 20) value.count = value.count + 1;
+		} else if (event.key === 'ArrowDown') {
+			event.preventDefault();
+			if (value.count > 1) value.count = value.count - 1;
+		}
+	}
 </script>
 
 <BoxContainer --color="var(--c-theme-dark)">
@@ -47,6 +62,7 @@
 				bind:this={elLetters}
 				value={lettersAsText}
 				on:input={onLetterInput}
+				on:keydown={onLetterInputKeydown}
 				minlength="1"
 				maxlength="20"
 				aria-label="Letters in the letter pool"
