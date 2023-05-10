@@ -9,6 +9,7 @@
 	const dispatch = createEventDispatcher();
 	let elLetters: HTMLInputElement;
 	let lettersAsText = value.letters.join('');
+	let maxCount = 20;
 
 	onMount(() => {
 		elLetters.select();
@@ -18,7 +19,7 @@
 	function onLetterInput(event: Event) {
 		const inputEvent = event as InputEvent;
 		const input = inputEvent.data;
-	
+
 		const inputMatch = input?.match(/\d/);
 
 		if (inputMatch) {
@@ -34,11 +35,17 @@
 	function onLetterInputKeydown(event: KeyboardEvent) {
 		if (event.key === 'ArrowUp') {
 			event.preventDefault();
-			if (value.count < 20) value.count = value.count + 1;
+			if (value.count < maxCount) value.count = value.count + 1;
 		} else if (event.key === 'ArrowDown') {
 			event.preventDefault();
 			if (value.count > 1) value.count = value.count - 1;
 		}
+	}
+
+	$: {
+		maxCount = Math.min(20, Math.max(1, value.letters.length));
+
+		if (value.count > maxCount) value.count = maxCount;
 	}
 </script>
 
@@ -50,7 +57,7 @@
 				type="number"
 				bind:value={value.count}
 				min="1"
-				max="20"
+				max={maxCount}
 				aria-label="Number of letters in the letter pool"
 			/>
 			<span>from</span>
