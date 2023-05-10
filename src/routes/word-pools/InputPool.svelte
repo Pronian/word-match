@@ -30,9 +30,7 @@
 	}
 
 	function onLetterInputKeydown(event: KeyboardEvent) {
-		if (event.key.match(/[a-z]/i)) {
-			return;
-		} else if (event.key === 'ArrowUp') {
+		if (event.key === 'ArrowUp') {
 			event.preventDefault();
 			if (value.count < 20) value.count = value.count + 1;
 		} else if (event.key === 'ArrowDown') {
