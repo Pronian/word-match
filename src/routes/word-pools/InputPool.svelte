@@ -15,7 +15,16 @@
 		elLetters.focus();
 	});
 
-	function onLetterInput() {
+	function onLetterInput(event: Event) {
+		const inputEvent = event as InputEvent;
+		const input = inputEvent.data;
+	
+		if (input?.match(/\d/)) {
+			value.count = Number(input);
+			elLetters.value = lettersAsText;
+			return;
+		}
+
 		lettersAsText = elLetters.value.toUpperCase();
 		value.letters = lettersAsText.split('');
 	}
@@ -23,9 +32,6 @@
 	function onLetterInputKeydown(event: KeyboardEvent) {
 		if (event.key.match(/[a-z]/i)) {
 			return;
-		} else if (event.key.match(/\d/)) {
-			event.preventDefault();
-			value.count = Number(event.key);
 		} else if (event.key === 'ArrowUp') {
 			event.preventDefault();
 			if (value.count < 20) value.count = value.count + 1;
