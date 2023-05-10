@@ -19,8 +19,10 @@
 		const inputEvent = event as InputEvent;
 		const input = inputEvent.data;
 	
-		if (input?.match(/\d/)) {
-			value.count = Number(input);
+		const inputMatch = input?.match(/\d/);
+
+		if (inputMatch) {
+			value.count = Number(inputMatch[0]);
 			elLetters.value = lettersAsText;
 			return;
 		}
