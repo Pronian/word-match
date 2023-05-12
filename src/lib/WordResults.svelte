@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { scale } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
-	import LetterSequence from "$lib/LetterSequence.svelte";
+	import LetterSequence from '$lib/LetterSequence.svelte';
 	export let words: string[] | undefined;
 
 	function removeWord(word: string) {
@@ -14,9 +14,14 @@
 		<div class="head">Results:</div>
 		<ol>
 			{#each words as word, i (word)}
-				<li animate:flip={{duration: d => Math.sqrt(d) * 20}} transition:scale>
+				<li animate:flip={{ duration: (d) => Math.sqrt(d) * 20 }} transition:scale>
 					<span class="num">{i + 1}.</span>
-					<LetterSequence value={word} on:close={() => {removeWord(word)}}/>
+					<LetterSequence
+						value={word}
+						on:close={() => {
+							removeWord(word);
+						}}
+					/>
 				</li>
 			{/each}
 		</ol>

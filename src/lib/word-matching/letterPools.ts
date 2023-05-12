@@ -114,10 +114,8 @@ export function wordMatchesLetterPools(word: string, pools: LetterPool[]) {
 export function findWordsFromLetterPools(pools: LetterPool[], dictionaryWords: string[]) {
 	const poolWordLength = wordLengthFromLetterPools(pools);
 	const wordsMatchingLength = dictionaryWords.filter((word) => word.length === poolWordLength);
-	console.log({ wordsMatchingLength });
 
 	const foundWords = wordsMatchingLength.filter((word) => wordMatchesLetterPools(word, pools));
-	console.log({ foundWords });
 
 	return foundWords;
 }
