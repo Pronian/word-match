@@ -2,8 +2,9 @@
 	import { onMount } from 'svelte';
 	import ButtonAdd from '$lib/ButtonAdd.svelte';
 	import ButtonRound from '$lib/ButtonRound.svelte';
+	import LetterSequence from '$lib/LetterSequence.svelte';
+	import WordResults from '$lib/WordResults.svelte';
 	import InputPool from './InputPool.svelte';
-	import LetterSequence from './LetterSequence.svelte';
 	import {
 		type PoolOrSequence,
 		findWordsFromPoolsAndSequences
@@ -11,7 +12,7 @@
 	import { loadWords } from '$lib/word-matching/dictionary';
 
 	let wordsPromise: Promise<string[]>;
-	let results: string[] = [];
+	let results: string[] | undefined = undefined;
 	let parts: PoolOrSequence[] = [];
 
 	onMount(() => {
@@ -38,6 +39,11 @@
 
 		const letters = last.letters.join('');
 		parts[parts.length - 1] = letters;
+	}
+
+	$: {
+		parts;
+		results = undefined; // reset results on input change
 	}
 
 	$: console.log('letter pool parts', parts);
@@ -80,18 +86,7 @@
 	{/await}
 </div>
 
-<div class="results">
-	{#if results.length > 0}
-		<ol>
-			Results:
-			{#each results as result}
-				<li>{result}</li>
-			{/each}
-		</ol>
-	{:else}
-		No results
-	{/if}
-</div>
+<WordResults words={results} />
 
 <style>
 	.pool-cont {
