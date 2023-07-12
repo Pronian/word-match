@@ -6,7 +6,7 @@ export async function loadWords() {
 	// Used dictionary from https://github.com/dwyl/english-words
 	let resBody = '';
 
-	resBody = await fetch('/words_alpha.txt')
+	resBody = await fetch('/words.txt')
 		.then((res) => res.text())
 		.catch((err) => {
 			console.error('Failed to load dictionary file.', err);
