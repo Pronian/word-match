@@ -5,18 +5,21 @@
 	import LetterSequence from '$lib/LetterSequence.svelte';
 	import WordResults from '$lib/WordResults.svelte';
 	import InputPool from './InputPool.svelte';
-	import {
-		type PoolOrSequence,
-		findWordsFromPoolsAndSequences
-	} from '$lib/word-matching/letterPools';
 	import { loadWords } from '$lib/word-matching/dictionary';
+	import type { PoolOrSequence } from '$lib/word-matching/letterPools';
+	import type { FindWordsMessage } from '$lib/word-matching/findWordsWorker';
 
 	let wordsPromise: Promise<string[]>;
+	let findWordsWorker: Worker;
 	let results: string[] | undefined = undefined;
+	let searching = false;
 	let parts: PoolOrSequence[] = [];
 
-	onMount(() => {
+	onMount(async () => {
 		wordsPromise = loadWords();
+
+		const FindWordsWorker = await import('$lib/word-matching/findWordsWorker?worker');
+		findWordsWorker = new FindWordsWorker.default();
 	});
 
 	function addPart() {
@@ -41,12 +44,25 @@
 		parts[parts.length - 1] = letters;
 	}
 
+	function findWords(dictionary: string[]) {
+		searching = true;
+		const message: FindWordsMessage = [parts, dictionary];
+
+		findWordsWorker.postMessage(message);
+
+		findWordsWorker.onmessage = (e: MessageEvent<string[]>) => {
+			results = e.data;
+			searching = false;
+		};
+	}
+
 	$: {
 		parts;
 		results = undefined; // reset results on input change
 	}
 
 	$: console.log('letter pool parts', parts);
+	$: console.log('searching', searching);
 </script>
 
 <div class="pool-cont">
@@ -80,13 +96,14 @@
 	{:then words}
 		<ButtonRound
 			on:click={() => {
-				results = findWordsFromPoolsAndSequences(parts, words);
-			}}>Find words</ButtonRound
-		>
+				findWords(words);
+			}}>
+			Find words
+		</ButtonRound>
 	{/await}
 </div>
 
-<WordResults words={results} />
+<WordResults words={results} {searching}/>
 
 <style>
 	.pool-cont {

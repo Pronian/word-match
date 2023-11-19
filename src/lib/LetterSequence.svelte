@@ -6,6 +6,7 @@
 	const dispatch = createEventDispatcher();
 
 	export let value: string;
+	export let closable = true;
 </script>
 
 <BoxContainer --color="var(--c-bg-dark)">
@@ -13,9 +14,11 @@
 		{#each value as letter}
 			<div class="letter">{letter}</div>
 		{/each}
-		<button title="Remove letter sequence" on:click={() => dispatch('close')}>
-			<CrossPlus class="i-cross" />
-		</button>
+		{#if closable}
+			<button title="Remove letter sequence" on:click={() => dispatch('close')}>
+				<CrossPlus class="i-cross" />
+			</button>
+		{/if}
 	</div>
 </BoxContainer>
 

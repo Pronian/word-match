@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { scale } from 'svelte/transition';
+	import { fade, scale } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	import LetterSequence from '$lib/LetterSequence.svelte';
 	export let words: string[] | undefined;
+	export let searching = false;
 
 	function removeWord(word: string) {
 		words = words?.filter((w) => w !== word);
@@ -10,7 +11,9 @@
 </script>
 
 <div class="results">
-	{#if words && words.length > 0}
+	{#if searching}
+		<div in:fade class="head">Finding words...</div>
+	{:else if words && words.length > 0}
 		<div class="head">Results:</div>
 		<ol>
 			{#each words as word, i (word)}
