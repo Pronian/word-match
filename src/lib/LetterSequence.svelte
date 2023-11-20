@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import BoxContainer from '$lib/BoxContainer.svelte';
 	import CrossPlus from '~icons/basil/cross-solid';
 
-	const dispatch = createEventDispatcher();
-
 	export let value: string;
 	export let closable = true;
+	export let onClose: (() => void) | undefined = undefined;
 </script>
 
 <BoxContainer --color="var(--c-bg-dark)">
@@ -15,7 +13,7 @@
 			<div class="letter">{letter}</div>
 		{/each}
 		{#if closable}
-			<button title="Remove letter sequence" on:click={() => dispatch('close')}>
+			<button title="Remove letter sequence" on:click={onClose}>
 				<CrossPlus class="i-cross" />
 			</button>
 		{/if}

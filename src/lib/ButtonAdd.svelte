@@ -5,10 +5,11 @@
 	export let title: string;
 	let className = '';
 	export { className as class };
+	export let onclick: (() => void) | undefined = undefined;
 </script>
 
 <BoxContainer class={className} --color="var(--c-green-dark)">
-	<button {title} on:click>
+	<button {title} on:click={onclick}>
 		<IconPlus width="32" height="32" transform="scale(1.2)" />
 	</button>
 </BoxContainer>

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { onDestroy, createEventDispatcher } from 'svelte';
-	const dispatch = createEventDispatcher();
+	import { onDestroy } from 'svelte';
 
 	export let depth = 5;
 	let className = '';
 	export { className as class };
 	export let classBtn = '';
+	export let onclick: (() => void) | undefined = undefined;
 
 	let dynamicDepth = depth + 'px';
 	let depthChangeTimeout = 0;
@@ -15,7 +15,7 @@
 		clearTimeout(depthChangeTimeout);
 
 		setTimeout(() => {
-			dispatch('click');
+			onclick?.();
 		}, duration);
 
 		depthChangeTimeout = setTimeout(() => {

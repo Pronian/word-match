@@ -21,7 +21,7 @@
 					<span class="num">{i + 1}.</span>
 					<LetterSequence
 						value={word}
-						on:close={() => {
+						onClose={() => {
 							removeWord(word);
 						}}
 					/>

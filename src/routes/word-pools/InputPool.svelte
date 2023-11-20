@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { onMount, createEventDispatcher } from 'svelte';
+	import { onMount } from 'svelte';
 	import BoxContainer from '$lib/BoxContainer.svelte';
 	import CrossPlus from '~icons/basil/cross-solid';
 	import type { LetterPool } from '$lib/word-matching/letterPools';
 
 	export let value: LetterPool = { count: 1, letters: ['A', 'B', 'C'] };
+	export let onClose: (() => void) | undefined = undefined;
 
-	const dispatch = createEventDispatcher();
 	let elLetters: HTMLInputElement;
 	let lettersAsText = value.letters.join('');
 	let maxCount = 20;
@@ -61,7 +61,7 @@
 				aria-label="Number of letters in the letter pool"
 			/>
 			<span>from</span>
-			<button title="Remove pool" on:click={() => dispatch('close')}>
+			<button title="Remove pool" on:click={onClose}>
 				<CrossPlus class="i-cross" />
 			</button>
 		</div>

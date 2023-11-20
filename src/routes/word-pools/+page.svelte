@@ -70,14 +70,14 @@
 		{#if typeof part === 'string'}
 			<LetterSequence
 				value={part}
-				on:close={() => {
+				onClose={() => {
 					removePart(part);
 				}}
 			/>
 		{:else}
 			<InputPool
 				bind:value={part}
-				on:close={() => {
+				onClose={() => {
 					removePart(part);
 				}}
 			/>
@@ -86,8 +86,8 @@
 </div>
 
 <div class="buttons">
-	<ButtonAdd class="add-pool" title="Add Word Pool" on:click={addPart} />
-	<ButtonRound classBtn="btn-convert" on:click={convertLastToSequence}>
+	<ButtonAdd class="add-pool" title="Add Word Pool" onclick={addPart} />
+	<ButtonRound classBtn="btn-convert" onclick={convertLastToSequence}>
 		Convert last<br />to sequence
 	</ButtonRound>
 
@@ -95,7 +95,7 @@
 		<div>Loading dictionary</div>
 	{:then words}
 		<ButtonRound
-			on:click={() => {
+			onclick={() => {
 				findWords(words);
 			}}>
 			Find words
