@@ -79,7 +79,6 @@
 				minlength="1"
 				maxlength="20"
 				aria-label="Letters in the letter pool"
-				autocomplete="false"
 				autocorrect="false"
 				autocapitalize="false"
 				spellcheck="false"

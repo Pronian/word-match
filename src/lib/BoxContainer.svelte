@@ -39,6 +39,7 @@
 	<div class="border-left" />
 	<div class="border-bottom" />
 	<div class="border-corner-right" />
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		class="box-content"
 		on:click={() => {
