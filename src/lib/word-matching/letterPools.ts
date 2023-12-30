@@ -22,13 +22,13 @@ export function normalizeToPools(parts: PoolOrSequence[]): LetterPool[] {
 					.split('')
 					.map((letter) => ({
 						letters: [letter],
-						count: 1
-					}))
+						count: 1,
+					})),
 			);
 		} else {
 			result.push({
 				letters: part.letters.map((letter) => letter.toLowerCase()),
-				count: part.count
+				count: part.count,
 			});
 		}
 	}
@@ -47,12 +47,12 @@ export function inputToLetterPools(searchStr: string) {
 		if (match.groups?.letter) {
 			result.push({
 				letters: [match.groups.letter],
-				count: 1
+				count: 1,
 			});
 		} else if (match.groups?.letters) {
 			result.push({
 				letters: match.groups.letters.split(''),
-				count: parseInt(match.groups.count)
+				count: parseInt(match.groups.count),
 			});
 		}
 	}

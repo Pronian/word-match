@@ -1,6 +1,6 @@
 import {
 	type PoolOrSequence,
-	findWordsFromPoolsAndSequences
+	findWordsFromPoolsAndSequences,
 } from '$lib/word-matching/letterPools';
 
 export type FindWordsMessage = [PoolOrSequence[], string[]];

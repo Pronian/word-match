@@ -97,13 +97,14 @@
 		<ButtonRound
 			onclick={() => {
 				findWords(words);
-			}}>
+			}}
+		>
 			Find words
 		</ButtonRound>
 	{/await}
 </div>
 
-<WordResults words={results} {searching}/>
+<WordResults words={results} {searching} />
 
 <style>
 	.pool-cont {
