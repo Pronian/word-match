@@ -1,5 +1,5 @@
 /**
- * Load words from a dictionary file.
+ * Load words from a statically hosted dictionary file.
  * @returns - An array of words.
  */
 export async function loadWords() {

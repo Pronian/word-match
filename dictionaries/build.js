@@ -1,13 +1,17 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
 /**
- * @param {string} path 
+ * Loads a file containing one word per line and returns an array of words.
+ * @param {string} path - the path to the file to load
  * @returns {Promise<string[]>}
  */
 async function loadDictFile(path) {
 	const filePath = new URL(path, import.meta.url);
 	const text = await readFile(filePath, 'utf-8');
-	return text.split('\n').map(line => line.trim()).filter(l => !!l);
+	return text
+		.split('\n')
+		.map((line) => line.trim())
+		.filter((l) => !!l);
 }
 
 /** @type {string[]} */

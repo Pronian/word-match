@@ -11,6 +11,11 @@ export interface LetterPool {
 
 export type PoolOrSequence = LetterPool | string;
 
+/**
+ * Convert an array of letter pools and sequences to an array of letter pools.
+ * @param parts - an array containing a mix of letter pools and sequences (literal strings)
+ * @returns an array of letter pools
+ */
 export function normalizeToPools(parts: PoolOrSequence[]): LetterPool[] {
 	let result: LetterPool[] = [];
 
@@ -36,7 +41,14 @@ export function normalizeToPools(parts: PoolOrSequence[]): LetterPool[] {
 	return result;
 }
 
-export function inputToLetterPools(searchStr: string) {
+/**
+ * Convert a word search string like `[flo]3[oau]1r` to an array of letter pools.
+ * @param searchStr - the word search string, brackets indicate a letter pool,
+ * the number after the brackets indicates how many letters to pick from the pool,
+ * if characters are not in brackets they are treated as a literal string
+ * @returns the letter pools that the word search string represents
+ */
+export function inputToLetterPools(searchStr: string): LetterPool[] {
 	const reVar = /(\[(?<letters>[a-z]+)\](?<count>\d{1,2}))|(?<letter>[a-z])/gi;
 	const result: LetterPool[] = [];
 
@@ -120,7 +132,17 @@ export function findWordsFromLetterPools(pools: LetterPool[], dictionaryWords: s
 	return foundWords;
 }
 
-export function findWordsFromPoolsAndSequences(parts: PoolOrSequence[], dictionaryWords: string[]) {
+/**
+ * Find all words in the dictionary that match the letter pools and sequences.
+ * @param parts - an array containing a mix of letter pools and
+ * sequences (literal strings) to use for the word search
+ * @param dictionaryWords - all the words to search in
+ * @returns the words that match the letter pools and sequences
+ */
+export function findWordsFromPoolsAndSequences(
+	parts: PoolOrSequence[],
+	dictionaryWords: string[],
+): string[] {
 	const pools = normalizeToPools(parts);
 	return findWordsFromLetterPools(pools, dictionaryWords);
 }
