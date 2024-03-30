@@ -1,7 +1,10 @@
 abaya
 adamsapple
 babysbreath
+baseballcap
 bathingsuit
+bloodvessel
+bloodvessels
 buttondownshirt
 buttondownshirts
 cloudfront
@@ -10,6 +13,8 @@ forestgreen
 fuschia
 gocart
 gocarts
+gokart
+gokarts
 heatwave
 kingpenguin
 kingpenguins
@@ -19,6 +24,7 @@ pituitarygland
 pituitaryglands
 polarvortex
 riverturtle
+robinseggblue
 rushhour
 seascape
 strawhat
