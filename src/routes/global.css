@@ -36,9 +36,12 @@ a:focus {
 	color: var(--c-theme-dark);
 }
 
+html {
+	background-color: #009de61e;
+}
+
 body {
 	margin: 0;
-	background-color: #009de61e;
 }
 
 h1,
@@ -57,5 +60,6 @@ input::-webkit-inner-spin-button {
 }
 
 input[type='number'] {
+	appearance: textfield;
 	-moz-appearance: textfield;
 }

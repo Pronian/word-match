@@ -88,7 +88,7 @@
 <div class="buttons">
 	<ButtonAdd class="add-pool" title="Add Word Pool" onclick={addPart} />
 	<ButtonRound classBtn="btn-convert" onclick={convertLastToSequence}>
-		Convert last<br />to sequence
+		Convert last to sequence
 	</ButtonRound>
 
 	{#await wordsPromise}
@@ -131,5 +131,7 @@
 
 	.buttons :global(.btn-convert) {
 		font-size: 15px;
+		text-wrap: balance;
+		width: 125px;
 	}
 </style>
